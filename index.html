@@ -3,213 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tropical Cloud Clusters Detection Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Tropical Cloud Detection System</title>
   <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: #0b132b;
-      color: #e0e0e0;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #0d1117;
+      color: #e6edf3;
+      overflow-x: hidden;
     }
 
     header {
-      background: linear-gradient(to right, #1c2541, #3a506b);
+      background-color: #161b22;
+      padding: 20px;
       text-align: center;
-      padding: 25px 10px;
-      color: #fff;
-      letter-spacing: 1px;
+      border-bottom: 1px solid #30363d;
     }
 
     header h1 {
-      font-size: 26px;
-      margin: 0;
+      color: #58a6ff;
+      font-size: 2em;
     }
 
     header p {
-      font-size: 14px;
-      opacity: 0.8;
+      color: #8b949e;
+      margin-top: 8px;
+      font-size: 1.1em;
     }
 
-    main {
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #161b22;
+      padding: 10px;
+      border-bottom: 1px solid #30363d;
+    }
+
+    nav a {
+      color: #e6edf3;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #58a6ff;
+    }
+
+    .hero {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/5/59/Hurricane_Dorian_02_Sept_2019_1445Z.jpg') no-repeat center center/cover;
+      height: 75vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      max-width: 600px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    section {
+      padding: 60px 10%;
+    }
+
+    section h2 {
+      color: #58a6ff;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    section p {
+      color: #c9d1d9;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .image-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 25px;
-      padding: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
-    .card {
-      background-color: #1c2541;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    .image-gallery img {
+      width: 100%;
+      border-radius: 10px;
       transition: transform 0.3s ease;
     }
 
-    .card:hover {
-      transform: scale(1.03);
-    }
-
-    .card h3 {
-      color: #5bc0be;
-      margin-bottom: 15px;
-    }
-
-    .metrics {
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .metric-value {
-      color: #f3ca20;
-      font-weight: bold;
-      font-size: 20px;
-      transition: all 0.4s ease-in-out;
-    }
-
-    .chart-container {
-      height: 300px;
-    }
-
-    button {
-      background-color: #5bc0be;
-      color: #0b132b;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #f3ca20;
+    .image-gallery img:hover {
+      transform: scale(1.05);
     }
 
     footer {
-      background: #1c2541;
+      background-color: #161b22;
       text-align: center;
-      padding: 15px;
-      color: #aaa;
-      font-size: 13px;
+      padding: 20px;
+      color: #8b949e;
+      border-top: 1px solid #30363d;
     }
 
-    img {
-      border-radius: 10px;
-      transition: opacity 0.5s;
-    }
-
-    .updated {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-top: 8px;
+    .scroll-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #58a6ff;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: none;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>🌩 Tropical Cloud Clusters Detection Dashboard</h1>
-    <p>Satellite-Based Half-Hourly Cloud Monitoring System</p>
+    <h1>Tropical Cloud Detection System</h1>
+    <p>Using Satellite Half-hourly Data</p>
   </header>
 
-  <main>
-    <div class="card">
-      <h3>🌍 Satellite View (Latest)</h3>
-      <img id="satelliteImage" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Hurricane_Isabel_from_ISS.jpg" width="100%">
-      <button onclick="updateImage()">Refresh Image</button>
-      <p class="updated" id="imgTime">Last updated: --</p>
-    </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="data.html">Data</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-    <div class="card">
-      <h3>☁ Cloud Cluster Summary</h3>
-      <div class="metrics">
-        Active Clusters: <span class="metric-value" id="clusters">0</span><br>
-        Cluster Density: <span class="metric-value" id="density">0%</span><br>
-        Avg Temperature: <span class="metric-value" id="temp">0°C</span><br>
-      </div>
-      <button onclick="updateSummary()">Update Data</button>
-      <p class="updated" id="dataTime">Last updated: --</p>
+  <div class="hero">
+    <h2>Monitoring Tropical Clouds in Real-Time</h2>
+    <p>Leveraging satellite data to detect, analyze, and visualize tropical cloud formations for weather forecasting and research.</p>
+  </div>
+  <section id="prediction-section">
+    <h2>Live Prediction Feed</h2>
+    <div id="prediction-box">
+        <p id="prediction-text">Loading latest prediction...</p>
     </div>
+   </section>
 
-    <div class="card chart-container">
-      <h3>📈 Cloud Intensity Trend (6-Hour Window)</h3>
-      <canvas id="cloudChart"></canvas>
-    </div>
+  <section>
+    <h2>What are Tropical Clouds?</h2>
+    <p>
+      Tropical clouds are dense and towering formations that occur in regions near the equator. They play a crucial
+      role in Earth’s energy balance and rainfall patterns. Monitoring these clouds is vital for understanding
+      tropical weather systems, predicting storms, and studying climate change.
+    </p>
+    <p>
+      Our system focuses on half-hourly satellite data to observe rapid changes in cloud patterns and detect
+      developing tropical disturbances. This approach improves early warning accuracy for severe weather events.
+    </p>
+  </section>
 
-    <div class="card">
-      <h3>🗺 Detected Cloud Clusters Map</h3>
-      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79790/tropicalstorm_gis_vir_2013-08-20.jpg" width="100%">
+  <section>
+    <h2>Satellite Cloud Imagery</h2>
+    <div class="image-gallery">
+      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/145000/145188/india_tmo_2021233_lrg.jpg" alt="Tropical Cloud Image 1">
+      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/147000/147195/typhoon-mindulle_vir_2021269_lrg.jpg" alt="Tropical Cloud Image 2">
+      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/148000/148678/hinnamnor_vir_2021245_lrg.jpg" alt="Tropical Cloud Image 3">
+      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/146000/146547/hurricane-ida_vir_2021239_lrg.jpg" alt="Tropical Cloud Image 4">
     </div>
-  </main>
+  </section>
+
+  <section>
+    <h2>Project Objective</h2>
+    <p>
+      The Tropical Cloud Detection System aims to provide a simple yet effective platform to visualize and
+      understand tropical weather phenomena. By combining half-hourly satellite data with advanced machine
+      learning algorithms (in future versions), this project aspires to predict cloud cluster development,
+      assess rainfall potential, and enhance disaster preparedness.
+    </p>
+  </section>
 
   <footer>
-    © 2025 | Tropical Cloud Clusters Detection Dashboard | Built by Yudhil Krishna
+    <p>Developed by Yudhil Krishna | BE Computer Science | RIT Bangalore</p>
   </footer>
 
+  <button id="scrollBtn" class="scroll-btn" onclick="scrollToTop()">↑</button>
+
   <script>
-    const ctx = document.getElementById("cloudChart").getContext("2d");
-    const chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'],
-        datasets: [{
-          label: "Cloud Intensity",
-          data: [40, 55, 60, 65, 58, 70],
-          borderColor: "#5bc0be",
-          backgroundColor: "rgba(91,192,190,0.2)",
-          fill: true,
-          tension: 0.4,
-          pointRadius: 5,
-          pointBackgroundColor: "#f3ca20"
-        }]
-      },
-      options: {
-        plugins: { legend: { labels: { color: "#fff" } } },
-        scales: {
-          x: { ticks: { color: "#aaa" }, grid: { color: "#333" } },
-          y: { ticks: { color: "#aaa" }, grid: { color: "#333" } }
-        }
+    const scrollBtn = document.getElementById("scrollBtn");
+
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
       }
-    });
+    };
 
-    function updateSummary() {
-      const clusters = Math.floor(Math.random() * 10) + 1;
-      const density = (Math.random() * 100).toFixed(1);
-      const temp = (25 + Math.random() * 6).toFixed(1);
-
-      animateValue("clusters", clusters);
-      animateValue("density", density + "%");
-      animateValue("temp", temp + "°C");
-
-      document.getElementById("dataTime").textContent = "Last updated: " + new Date().toLocaleTimeString();
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    function updateImage() {
-      const img = document.getElementById("satelliteImage");
-      img.style.opacity = 0.5;
-      setTimeout(() => {
-        img.src = "https://source.unsplash.com/800x400/?satellite,clouds,earth&" + new Date().getTime();
-        img.style.opacity = 1;
-      }, 400);
-      document.getElementById("imgTime").textContent = "Last updated: " + new Date().toLocaleTimeString();
-    }
-
-    function animateValue(id, newValue) {
-      const el = document.getElementById(id);
-      el.textContent = newValue;
-      el.style.transform = "scale(1.3)";
-      setTimeout(() => { el.style.transform = "scale(1)"; }, 300);
-    }
-
-    // Auto-refresh every 30s
-    setInterval(() => {
-      updateSummary();
-      updateImage();
-    }, 30000);
-
-    updateSummary();
   </script>
+  <script src="script.js"></script>
+
 </body>
 </html>

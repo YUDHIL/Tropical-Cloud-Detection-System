@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data - Tropical Cloud Detection System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Tropical Cloud Detection System</h1>
+    <p>Monitoring Cloud Clusters Using INSAT Satellite Data</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="data.html" class="active">Data</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section>
+    <h2>INSAT Satellite Data Overview</h2>
+    <p>
+      The data used in this project comes from the <b>Indian National Satellite System (INSAT)</b>, a multipurpose satellite
+      system developed and operated by the <b>Indian Space Research Organisation (ISRO)</b>. The INSAT series has been a 
+      cornerstone of India's meteorological services since the early 1980s.
+    </p>
+    <p>
+      The latest missions, <b>INSAT-3D</b> and <b>INSAT-3DR</b>, are equipped with advanced imaging and atmospheric sounding
+      instruments that provide high-resolution cloud imagery and temperature profiles. These satellites capture 
+      multi-spectral images every 30 minutes, enabling detailed observation of tropical weather systems.
+    </p>
+    <p>
+      Each image contains vital information about cloud structure, density, and movement. These observations are essential 
+      for detecting early signs of tropical convection, which can lead to the formation of thunderstorms or cyclones.
+    </p>
+  </section>
+
+  <section>
+    <h2>Data Collection and Processing</h2>
+    <p>
+      The raw satellite data is obtained through <b>Meteorological and Oceanographic Satellite Data Archival Centre (MOSDAC)</b>,
+      maintained by ISRO. This data is available in formats such as <b>HDF5</b> and <b>NetCDF</b>, containing multiple channels 
+      including visible, shortwave infrared, thermal infrared, and water vapour bands.
+    </p>
+    <p>
+      The project preprocesses this raw data using <b>Python-based image processing scripts</b>. These scripts extract 
+      essential parameters like brightness temperature, cloud top height, and cloud density. The processed outputs 
+      are converted into <b>GeoTIFF</b> or <b>PNG</b> images for visualization in this dashboard.
+    </p>
+    <p>
+      This process ensures that only relevant and high-quality data is used for machine learning models and visualization.
+      By updating every 30 minutes, the system can track evolving weather patterns with near real-time accuracy.
+    </p>
+  </section>
+
+  <section>
+    <h2>Data Characteristics</h2>
+    <ul>
+      <li><b>Source:</b> INSAT-3D / INSAT-3DR Satellites by ISRO</li>
+      <li><b>Resolution:</b> Spatial - 1km to 4km | Temporal - Every 30 minutes</li>
+      <li><b>Coverage:</b> Indian subcontinent and tropical oceanic regions</li>
+      <li><b>Format:</b> HDF5 / GeoTIFF / PNG for visualization</li>
+      <li><b>Channels:</b> Visible, Shortwave Infrared, Thermal Infrared, Water Vapour</li>
+    </ul>
+    <p>
+      These datasets are crucial for identifying tropical cloud clusters, especially those showing rapid vertical growth,
+      which indicates the early stages of strong convection. Such information helps in predicting storm intensification 
+      and heavy rainfall events.
+    </p>
+  </section>
+
+  <section>
+    <h2>Importance of INSAT Data in Tropical Cloud Detection</h2>
+    <p>
+      Tropical cloud clusters form due to intense heating in the equatorial regions. INSAT’s frequent observations help 
+      scientists monitor the lifecycle of these clouds, from their initial buildup to dissipation.
+    </p>
+    <p>
+      The high temporal resolution (30-minute interval) enables tracking of cloud motion and temperature changes, 
+      allowing early warning of potential tropical storms. Combined with AI algorithms, such data can greatly enhance 
+      disaster preparedness and weather forecasting accuracy.
+    </p>
+  </section>
+
+  <section>
+    <h2>Integration with AI Models</h2>
+    <p>
+      This project aims to integrate INSAT data with machine learning models such as <b>Convolutional Neural Networks (CNNs)</b>
+      to automatically detect and classify tropical cloud clusters. The models analyze image textures and temperature variations
+      to identify high-risk zones.
+    </p>
+    <p>
+      The backend processing (Flask + ML model) generates predictions that are displayed on the dashboard in real-time. 
+      Users can visualize predicted cloud clusters, rainfall zones, and other meteorological indicators directly from the 
+      homepage.
+    </p>
+  </section>
+
+  <section>
+    <h2>Sample Satellite Images</h2>
+    <div class="image-gallery">
+      <img src="https://www.isro.gov.in/media_isro/image/satellites/insat3dr/insat3dr_image.jpg" alt="INSAT-3DR Satellite">
+      <img src="https://www.isro.gov.in/media_isro/image/earth/2024/INSAT_3D_Image_1.jpg" alt="INSAT Cloud Data 1">
+      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/145000/145188/india_tmo_2021233_lrg.jpg" alt="Cloud Observation 2">
+      <img src="https://www.isro.gov.in/media_isro/image/satellites/insat3d/insat3d_image.jpg" alt="INSAT Satellite Visualization">
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Tropical Cloud Detection System | Designed by Yudhil Krishna</p>
+  </footer>
+</body>
+</html>

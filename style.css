@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #0d1117;
+  color: #e6edf3;
+}
+
+header {
+  background-color: #161b22;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #30363d;
+}
+
+header h1 {
+  color: #58a6ff;
+  font-size: 2em;
+}
+
+header p {
+  color: #8b949e;
+  margin-top: 8px;
+  font-size: 1.1em;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #161b22;
+  padding: 10px;
+  border-bottom: 1px solid #30363d;
+}
+
+nav a {
+  color: #e6edf3;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover, nav a.active {
+  color: #58a6ff;
+}
+
+section {
+  padding: 60px 10%;
+}
+
+section h2 {
+  color: #58a6ff;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+section p {
+  color: #c9d1d9;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.image-gallery img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.05);
+}
+
+form {
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #161b22;
+  color: #fff;
+}
+
+button {
+  background: #58a6ff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1f6feb;
+}
+
+footer {
+  background-color: #161b22;
+  text-align: center;
+  padding: 20px;
+  color: #8b949e;
+  border-top: 1px solid #30363d;
+  margin-top: 40px;
+}
+#prediction-section {
+  text-align: center;
+  background: #161b22;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(88, 166, 255, 0.1);
+}
+
+#prediction-box {
+  margin-top: 10px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 8px;
+}
+
+#prediction-text {
+  font-size: 1.1em;
+  color: #58a6ff;
+}
