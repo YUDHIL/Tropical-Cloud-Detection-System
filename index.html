@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tropical Cloud Clusters Detection Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #0b132b;
+      color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(to right, #1c2541, #3a506b);
+      text-align: center;
+      padding: 25px 10px;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      padding: 30px;
+    }
+
+    .card {
+      background-color: #1c2541;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card h3 {
+      color: #5bc0be;
+      margin-bottom: 15px;
+    }
+
+    .metrics {
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .metric-value {
+      color: #f3ca20;
+      font-weight: bold;
+      font-size: 20px;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .chart-container {
+      height: 300px;
+    }
+
+    button {
+      background-color: #5bc0be;
+      color: #0b132b;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #f3ca20;
+    }
+
+    footer {
+      background: #1c2541;
+      text-align: center;
+      padding: 15px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    img {
+      border-radius: 10px;
+      transition: opacity 0.5s;
+    }
+
+    .updated {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌩 Tropical Cloud Clusters Detection Dashboard</h1>
+    <p>Satellite-Based Half-Hourly Cloud Monitoring System</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h3>🌍 Satellite View (Latest)</h3>
+      <img id="satelliteImage" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Hurricane_Isabel_from_ISS.jpg" width="100%">
+      <button onclick="updateImage()">Refresh Image</button>
+      <p class="updated" id="imgTime">Last updated: --</p>
+    </div>
+
+    <div class="card">
+      <h3>☁ Cloud Cluster Summary</h3>
+      <div class="metrics">
+        Active Clusters: <span class="metric-value" id="clusters">0</span><br>
+        Cluster Density: <span class="metric-value" id="density">0%</span><br>
+        Avg Temperature: <span class="metric-value" id="temp">0°C</span><br>
+      </div>
+      <button onclick="updateSummary()">Update Data</button>
+      <p class="updated" id="dataTime">Last updated: --</p>
+    </div>
+
+    <div class="card chart-container">
+      <h3>📈 Cloud Intensity Trend (6-Hour Window)</h3>
+      <canvas id="cloudChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>🗺 Detected Cloud Clusters Map</h3>
+      <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79790/tropicalstorm_gis_vir_2013-08-20.jpg" width="100%">
+    </div>
+  </main>
+
+  <footer>
+    © 2025 | Tropical Cloud Clusters Detection Dashboard | Built by Yudhil Krishna
+  </footer>
+
+  <script>
+    const ctx = document.getElementById("cloudChart").getContext("2d");
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'],
+        datasets: [{
+          label: "Cloud Intensity",
+          data: [40, 55, 60, 65, 58, 70],
+          borderColor: "#5bc0be",
+          backgroundColor: "rgba(91,192,190,0.2)",
+          fill: true,
+          tension: 0.4,
+          pointRadius: 5,
+          pointBackgroundColor: "#f3ca20"
+        }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: "#fff" } } },
+        scales: {
+          x: { ticks: { color: "#aaa" }, grid: { color: "#333" } },
+          y: { ticks: { color: "#aaa" }, grid: { color: "#333" } }
+        }
+      }
+    });
+
+    function updateSummary() {
+      const clusters = Math.floor(Math.random() * 10) + 1;
+      const density = (Math.random() * 100).toFixed(1);
+      const temp = (25 + Math.random() * 6).toFixed(1);
+
+      animateValue("clusters", clusters);
+      animateValue("density", density + "%");
+      animateValue("temp", temp + "°C");
+
+      document.getElementById("dataTime").textContent = "Last updated: " + new Date().toLocaleTimeString();
+    }
+
+    function updateImage() {
+      const img = document.getElementById("satelliteImage");
+      img.style.opacity = 0.5;
+      setTimeout(() => {
+        img.src = "https://source.unsplash.com/800x400/?satellite,clouds,earth&" + new Date().getTime();
+        img.style.opacity = 1;
+      }, 400);
+      document.getElementById("imgTime").textContent = "Last updated: " + new Date().toLocaleTimeString();
+    }
+
+    function animateValue(id, newValue) {
+      const el = document.getElementById(id);
+      el.textContent = newValue;
+      el.style.transform = "scale(1.3)";
+      setTimeout(() => { el.style.transform = "scale(1)"; }, 300);
+    }
+
+    // Auto-refresh every 30s
+    setInterval(() => {
+      updateSummary();
+      updateImage();
+    }, 30000);
+
+    updateSummary();
+  </script>
+</body>
+</html>
